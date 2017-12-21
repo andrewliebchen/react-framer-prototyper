@@ -1,8 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Flex } from "reflexbox";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import Nav from "./Nav";
+import App from "./App";
+import registerServiceWorker from "./registerServiceWorker";
+
+import "./index.css";
+
+const Routes = props => (
+  <Router>
+    <Flex className="Wrapper" align="stretch" justify="stretch" column>
+      <Nav {...props} />
+      {props.pages.map(page => (
+        <Route
+          key={page}
+          path={`/${page}`}
+          render={() => <App pages={props.pages} />}
+        />
+      ))}
+    </Flex>
+  </Router>
+);
+
+ReactDOM.render(
+  <Routes pages={["data", "styles", "components", "layouts", "flows"]} />,
+  document.getElementById("root")
+);
 registerServiceWorker();

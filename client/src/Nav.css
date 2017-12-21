@@ -1,0 +1,17 @@
+.Nav {
+  border-bottom: 1px solid;
+}
+
+.NavItem {
+  cursor: pointer;
+  display: flex;
+  flex: 1;
+}
+
+.NavItem + .NavItem {
+  border-left: 1px solid;
+}
+
+.NavItem.Selected {
+  font-weight: bold;
+}
