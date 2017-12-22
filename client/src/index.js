@@ -1,31 +1,31 @@
 import React from "react";
+import { Provider } from "react-redux";
+import store from "./store";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Flex } from "reflexbox";
 
-import Nav from "./Nav";
-import App from "./App";
-import registerServiceWorker from "./registerServiceWorker";
+import Nav from "./components/Nav";
+import Styles from "./components/Styles/Styles";
+
+import registerServiceWorker from "./utils/registerServiceWorker";
 
 import "./index.css";
 
 const Routes = props => (
   <Router>
     <Flex className="Wrapper" align="stretch" justify="stretch" column>
-      <Nav {...props} />
-      {props.pages.map(page => (
-        <Route
-          key={page}
-          path={`/${page}`}
-          render={() => <App page={page} />}
-        />
-      ))}
+      <Nav pages={["data", "styles", "components", "layouts", "flows"]} />
+      <Route path="/styles" component={Styles} />
     </Flex>
   </Router>
 );
 
 ReactDOM.render(
-  <Routes pages={["data", "styles", "components", "layouts", "flows"]} />,
+  <Provider store={store}>
+    <Routes />
+  </Provider>,
   document.getElementById("root")
 );
+
 registerServiceWorker();
