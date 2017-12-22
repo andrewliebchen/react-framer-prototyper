@@ -9,14 +9,28 @@ import Preview from "./Preview";
 import "./App.css";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: "One"
+    };
+  }
+
   render() {
     return (
       <Flex className="App h100">
         <Box w={1 / 6}>
-          <Sidebar />
+          <Sidebar
+            elements={["One", "Two"]}
+            selectElement={element => this.setState({ selected: element })}
+            selected={this.state.selected}
+          />
         </Box>
         <Box auto>
-          <Editor />
+          <Editor
+            code="<div>Hello world!</div>"
+            updateCode={value => console.log(value)}
+          />
         </Box>
         <Box auto>
           <Preview />
