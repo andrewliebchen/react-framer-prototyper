@@ -9,7 +9,6 @@ const asteroid = new Asteroid({
 
 // if you want realitme updates in all connected clients
 // subscribe to the publication
-asteroid.subscribe("styles");
 
 // asteroid.ddp.on('added', (doc) => {
 //   // we need proper document object format here

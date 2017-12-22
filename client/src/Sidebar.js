@@ -6,6 +6,7 @@ import "./Sidebar.css";
 
 const Sidebar = props => (
   <div className="Sidebar p1 h100">
+    <button onClick={props.handleAddElement}>Add</button>
     {props.elements &&
       props.elements.map(element => (
         <div
@@ -26,7 +27,8 @@ const Sidebar = props => (
 Sidebar.propTypes = {
   selectElement: PropTypes.func,
   elements: PropTypes.array,
-  selected: PropTypes.string
+  selected: PropTypes.string,
+  handleAddElement: PropTypes.func
 };
 
 export default Sidebar;
