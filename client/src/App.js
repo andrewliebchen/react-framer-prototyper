@@ -10,6 +10,8 @@ import Preview from "./Preview";
 
 import "./App.css";
 
+let handler;
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -20,8 +22,8 @@ class App extends Component {
 
   componentWillMount() {
     // Subscription
-    asteroid
-      .call(`get${_.capitalize(this.props.page)}`)
+    handler = asteroid.call(`get${_.capitalize(this.props.page)}`);
+    handler
       .then(result => {
         console.log("Success");
         this.setState({ elements: result });
@@ -30,6 +32,11 @@ class App extends Component {
         console.log("Error");
         console.error(error);
       });
+  }
+
+  componentWillUnmount() {
+    // Not sure if this is necessary
+    asteroid.unsubscribe(handler.id);
   }
 
   render() {
