@@ -6,19 +6,20 @@ import "./Sidebar.css";
 
 const Sidebar = props => (
   <div className="Sidebar p1 h100">
-    {props.elements.map(element => (
-      <div
-        key={element}
-        className={classnames({
-          SidebarElement: true,
-          p1: true,
-          Selected: element === props.selected
-        })}
-        onClick={props.selectElement.bind(null, element)}
-      >
-        {element}
-      </div>
-    ))}
+    {props.elements &&
+      props.elements.map(element => (
+        <div
+          key={element._id}
+          className={classnames({
+            SidebarElement: true,
+            p1: true,
+            Selected: element.name === props.selected
+          })}
+          onClick={props.selectElement.bind(null, element._id)}
+        >
+          {element.name}
+        </div>
+      ))}
   </div>
 );
 

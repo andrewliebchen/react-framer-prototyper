@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Flex, Box } from "reflexbox";
 import PropTypes from "prop-types";
+import asteroid from "./asteroid";
+import _ from "lodash";
 
 import Sidebar from "./Sidebar";
 import Editor from "./Editor";
@@ -12,8 +14,22 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: "One"
+      elements: null
     };
+  }
+
+  componentWillMount() {
+    // Subscription
+    asteroid
+      .call(`get${_.capitalize(this.props.page)}`)
+      .then(result => {
+        console.log("Success");
+        this.setState({ elements: result });
+      })
+      .catch(error => {
+        console.log("Error");
+        console.error(error);
+      });
   }
 
   render() {
@@ -21,9 +37,8 @@ class App extends Component {
       <Flex className="App h100">
         <Box w={1 / 6}>
           <Sidebar
-            elements={["One", "Two"]}
             selectElement={element => this.setState({ selected: element })}
-            selected={this.state.selected}
+            {...this.state}
           />
         </Box>
         <Box auto>
@@ -41,7 +56,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  pages: PropTypes.array
+  page: PropTypes.string
 };
 
 export default App;

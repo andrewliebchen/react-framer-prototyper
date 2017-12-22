@@ -17,7 +17,7 @@ const Routes = props => (
         <Route
           key={page}
           path={`/${page}`}
-          render={() => <App pages={props.pages} />}
+          render={() => <App page={page} />}
         />
       ))}
     </Flex>
